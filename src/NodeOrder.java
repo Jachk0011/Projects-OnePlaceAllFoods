@@ -20,7 +20,7 @@ public class NodeOrder {
 	// NICE VIEW DATA
 	public String toString()
 	{
-		return "" + this.name + "\n";
+		return this.quantity + " " + this.name + " " + this.total + "\n";
 	}
 	
 	

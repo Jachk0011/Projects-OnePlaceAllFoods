@@ -126,9 +126,11 @@ public class Run {
 		System.out.println("****************************************************************************************************************");
 	}
 	
-	public void optionsSecondLevel()
+	public int optionsSecondLevel() throws NumberFormatException, IOException
 	{
-		System.out.println("\nPlease choose one option or push zero to return main screen");		
+		System.out.println("\nPlease choose one option or push zero to return main screen");
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		return Integer.parseInt(br.readLine());
 	}
 	
 	public void optionsIntialMessage()
@@ -149,11 +151,12 @@ public class Run {
 		
 		if(tmp != null)
 		{
-			tmp.toString();
-			//System.out.println("Index de quantity of the product: ");
-			//BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-			//int units = Integer.parseInt(br.readLine());
-			//this.order(tmp, units);
+			//tmp.toString();
+			System.out.println("Index de quantity of the product: ");
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			int units = Integer.parseInt(br.readLine());
+			NodeOrder n = this.order(tmp, units);
+			System.out.println(n.toString());
 		}			
 	}
 
@@ -200,8 +203,9 @@ public class Run {
 			case 2:System.out.println("\tMENUS\t\n");
 			this.readFile("menus.txt");
 			System.out.println(" ");
-			this.optionsSecondLevel();
+			option = this.optionsSecondLevel();
 			this.choosing(option);
+			this.optionsIntialMessage();
 			
 			break;
 			
