@@ -194,6 +194,20 @@ public class Restaurants
 	}
 
 
-	
+	//return 0 if the data value doesn't exist, otherwise, return the position of the value.
+	public NodeRestaurants searchOption(int id)
+	{
+		NodeRestaurants tmp = this.getHead();
+					
+		while(tmp.id != id && tmp.next != null)		
+			tmp = tmp.next;
+				
+		if(tmp.id == id)
+			return new NodeRestaurants(tmp.id, tmp.name, tmp.menu, tmp.worth);
+		else
+			return null;
+							
+		
+	}
 	
 }

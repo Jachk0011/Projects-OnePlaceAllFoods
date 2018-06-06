@@ -143,6 +143,31 @@ public class Run {
 		System.out.println("-1. Exit");
 	}
 	
+	public void choosing(int option) throws NumberFormatException, IOException
+	{
+		NodeRestaurants tmp = restaurants.searchOption(option);
+		
+		if(tmp != null)
+		{
+			tmp.toString();
+			//System.out.println("Index de quantity of the product: ");
+			//BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			//int units = Integer.parseInt(br.readLine());
+			//this.order(tmp, units);
+		}			
+	}
+
+
+	public NodeOrder order(NodeRestaurants newNode, int q) {
+		
+		int quantity = q;
+		String name = newNode.name;
+		double total = (newNode.worth)*quantity;
+	    
+		return new NodeOrder (quantity,name,total);
+	}
+	
+	
 	public void runDemo() throws IOException
 	{
 		
@@ -152,10 +177,12 @@ public class Run {
 		int option;		
 		this.optionsIntialMessage();
 		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
 		do
 		{	
 			
-			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			
 			String line = br.readLine();
 			option = Integer.parseInt(line);
 			
@@ -174,6 +201,8 @@ public class Run {
 			this.readFile("menus.txt");
 			System.out.println(" ");
 			this.optionsSecondLevel();
+			this.choosing(option);
+			
 			break;
 			
 			case 3: System.out.println("\tFILTER\t\n");
@@ -206,12 +235,7 @@ public class Run {
 			default: System.out.println("Invalid option");
 				this.optionsIntialMessage();
 				break;
-			}
-			
-			
-			/*BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-			String line = br.readLine();
-			option = Integer.parseInt(line);*/
+			}	
 			
 		}while(option != -1);
 		
