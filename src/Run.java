@@ -68,6 +68,9 @@ public class Run {
 
             /*for (int i = 10; i < 20; i++)
                 pw.println("Linea " + i);*/
+            
+            	pw.print(users.getTail().user + " " + users.getTail().pass);
+            
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -94,7 +97,7 @@ public class Run {
 		System.out.println("0. Exit");
 	}
 	
-	public void initialMessage() throws IOException
+	public void runDemo() throws IOException
 	{
 		System.out.println("****************************************************************************************************************");		
 		System.out.println(" ");
@@ -103,7 +106,8 @@ public class Run {
 		System.out.println("****************************************************************************************************************");
 		
 		
-		this.loadUsers();		
+		this.loadUsers();
+		boolean flagCreateUsers = false;
 		int option = -1;		
 		this.optionsIntialMessage();
 		
@@ -124,9 +128,9 @@ public class Run {
 				break;
 			case 4: System.out.println("Login");
 				break;
-			case 5: System.out.println("Sign up");
-				users.createUser();
-				users.printList();
+			case 5: System.out.println("Sign up");				
+				if(users.createUser())
+					this.writeFileUsers();
 				this.optionsIntialMessage();
 				break;
 			case 0: System.out.println("Exit");
@@ -145,12 +149,12 @@ public class Run {
 			
 		}while(option != 0);
 		
-		System.out.println("THANK YOU TO USE OUR APPLICATION");
+		System.out.println("\nTHANK YOU TO USE OUR APPLICATION\n");
 	}
 	
 	public static void main(String[] args) throws IOException {
 		Run r = new Run();
-		r.initialMessage();
+		r.runDemo();
 		users.printList();
 		
 		

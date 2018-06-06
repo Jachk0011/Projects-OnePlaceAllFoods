@@ -180,14 +180,14 @@ public class Users
 				position++;
 			}			
 			if(tmp.user == user)	
-				return flag = true;
+				return flag = false;
 			else
-				return false;
+				return true;
 		}
 	}
 	
 
-	public void createUser() throws IOException
+	public boolean createUser() throws IOException
 	{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));		
 		System.out.print("Please, enter the user name: ");
@@ -201,12 +201,14 @@ public class Users
 			System.out.println("***********************************");
 			System.out.println("THE USER WAS CREATED SUCCESSFULLY !!!");
 			System.out.println("***********************************\n");
+			return true;
 		}
 		else
 		{
 			System.out.println("***********************************");
 			System.out.println("THE USER ALREADY EXISTED");		
 			System.out.println("***********************************\n");
+			return false;
 		}
 			
 	}
