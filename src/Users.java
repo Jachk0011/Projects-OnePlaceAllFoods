@@ -1,5 +1,7 @@
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 //he behavior like a List
@@ -160,18 +162,48 @@ public class Users
 	}
 
 
-	public void createUser(String user, String pass)
+	//print if the user value exist or not  
+	public boolean validationUser(String user) 
 	{
+		boolean flag = false;
 		
-		
-		
+		if(this.emptyList())
+			return true;
+		else
+		{
+			NodeUsers tmp = this.getHead();
+			int position = 1;
+			
+			while(tmp.user != user && tmp.next != null)
+			{
+				tmp = tmp.next;
+				position++;
+			}			
+			if(tmp.user == user)	
+				return flag = true;
+			else
+				return false;
+		}
 	}
 	
-	public boolean validationUser(String user)
+
+	public void createUser() throws IOException
 	{
-		return false;
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		
+		System.out.println("Please, enter the user name: ");
+		String user = br.readLine();
+		System.out.println("Please, enter the password: ");
+		String pass = br.readLine();
+		
+		if(this.validationUser(user))
+		{
+			this.addEnd(new NodeUsers(user, pass));
+			System.out.println("The user was created successfully");
+		}
+		else
+			System.out.println("The user already exists");		
 	}
-
-
-
+	
 }

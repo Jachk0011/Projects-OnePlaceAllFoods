@@ -3,7 +3,7 @@ import java.io.*;
 
 public class Run {
 
-	
+	static Users users = new Users();  
 	
 	public void optionsIntialMessage()
 	{
@@ -11,6 +11,7 @@ public class Run {
 		System.out.println("2. Filter");
 		System.out.println("3. Search");
 		System.out.println("4. Login");
+		System.out.println("5. Sign up");
 		System.out.println("0. Exit");
 	}
 	
@@ -28,6 +29,8 @@ public class Run {
 		
 		do
 		{			
+			
+			
 			switch(option) 
 			{
 			case -1: ;
@@ -39,6 +42,12 @@ public class Run {
 				break;
 			case 3: System.out.println("Search");
 				break;
+			case 4: System.out.println("Login");
+				break;
+			case 5: System.out.println("Sign up");
+				users.createUser();
+				this.optionsIntialMessage();
+				break;
 			case 0: System.out.println("Exit");
 				break;
 			default: System.out.println("Invalid option");
@@ -49,6 +58,8 @@ public class Run {
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			String line = br.readLine();
 			option = Integer.parseInt(line);
+			
+			
 			
 		}while(option != 0);
 		
