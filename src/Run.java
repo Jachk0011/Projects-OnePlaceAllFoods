@@ -23,9 +23,7 @@ public class Run {
 		BufferedReader br = null;
 
 		try 
-		{
-			
-			
+		{			
 			file = new File (nameFile);
 			fr = new FileReader (file);
 			br = new BufferedReader(fr);
@@ -34,9 +32,7 @@ public class Run {
 			{
 				String line = null,
 						user,
-						pass
-						;
-				
+						pass;				
 				
 				while((line = br.readLine()) != null)
 				{
@@ -51,9 +47,7 @@ public class Run {
 			if(nameFile.equals("Restaurants.txt"))
 			{
 				String line = null,
-						restaurant;
-						
-				
+						restaurant;				
 				
 				while((line = br.readLine()) != null)
 				{
@@ -62,12 +56,7 @@ public class Run {
 				}
 			}
 			else
-				System.out.println("WE COULDN NOT LOAD ANY EXTERNAL FILE");
-			
-			
-			 
-			
-			
+				System.out.println("WE COULDN NOT LOAD ANY EXTERNAL FILE");			
 		}
 		catch(Exception e)
 		{
@@ -95,8 +84,6 @@ public class Run {
             pw = new PrintWriter(file);         
             
         	pw.print(users.getTail().user + " " + users.getTail().pass);
-            
-
         }
         catch (Exception e) 
         {
@@ -144,9 +131,7 @@ public class Run {
 		this.optionsIntialMessage();
 		
 		do
-		{			
-			
-			
+		{				
 			switch(option) 
 			{
 			case -1: ;
@@ -185,8 +170,6 @@ public class Run {
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			String line = br.readLine();
 			option = Integer.parseInt(line);
-			
-			
 			
 		}while(option != 0);
 		

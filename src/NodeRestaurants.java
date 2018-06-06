@@ -14,7 +14,7 @@ public class NodeRestaurants {
 	// NICE VIEW DATA
 	public String toString()
 	{
-		return "Restaurante name: " + this.name + "\n";
+		return "Restaurant: " + this.name + "\n";
 	}	
 	
 	

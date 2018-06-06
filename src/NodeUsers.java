@@ -3,8 +3,10 @@ public class NodeUsers {
 	
 	public String user;
 	public String pass;
-	public NodeUsers next;
 	public boolean status = false;
+	public int bank;
+	public NodeUsers next; //pointer
+	
 	
 	//CONSTRUCTORS 
 	public NodeUsers (){}
