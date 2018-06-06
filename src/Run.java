@@ -1,9 +1,88 @@
 import java.io.*;
-
+import java.util.StringTokenizer;
 
 public class Run {
 
 	static Users users = new Users();  
+	
+	public void loadUsers()
+	{
+		this.readFileUsers();
+	}
+	
+	public void readFileUsers()
+	{
+		File file = null;
+		FileReader fr = null;
+		BufferedReader br = null;
+
+		try 
+		{
+			file = new File ("Users.txt");
+			fr = new FileReader (file);
+			br = new BufferedReader(fr);
+			
+			String line = null,
+					user,
+					pass
+					;
+			
+			
+			while((line = br.readLine()) != null)
+			{
+				StringTokenizer st = new StringTokenizer(line);
+				user = st.nextToken();
+				pass = st.nextToken();
+				
+				this.users.addEnd(new NodeUsers(user, pass));
+			}
+			
+			 
+			
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{	         
+			try{                    
+				if( fr != null ){   
+					fr.close();     
+				}                  
+			}catch (Exception e2){ 
+				e2.printStackTrace();
+			}
+		}
+	}	
+	
+	public void writeFileUsers()
+	{
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        try
+        {
+            fichero = new FileWriter("Users.txt", true);
+            pw = new PrintWriter(fichero);
+
+            /*for (int i = 10; i < 20; i++)
+                pw.println("Linea " + i);*/
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+           try {
+           // Nuevamente aprovechamos el finally para 
+           // asegurarnos que se cierra el fichero.
+           if (null != fichero)
+              fichero.close();
+           } catch (Exception e2) {
+              e2.printStackTrace();
+           }
+        }
+    }
+	
 	
 	public void optionsIntialMessage()
 	{
@@ -24,7 +103,8 @@ public class Run {
 		System.out.println("****************************************************************************************************************");
 		
 		
-		int option = -1;
+		this.loadUsers();		
+		int option = -1;		
 		this.optionsIntialMessage();
 		
 		do
@@ -46,11 +126,13 @@ public class Run {
 				break;
 			case 5: System.out.println("Sign up");
 				users.createUser();
+				users.printList();
 				this.optionsIntialMessage();
 				break;
 			case 0: System.out.println("Exit");
 				break;
 			default: System.out.println("Invalid option");
+				this.optionsIntialMessage();
 				break;
 			}
 			
@@ -69,6 +151,8 @@ public class Run {
 	public static void main(String[] args) throws IOException {
 		Run r = new Run();
 		r.initialMessage();
+		users.printList();
+		
 		
 
 	}

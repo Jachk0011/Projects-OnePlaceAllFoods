@@ -189,21 +189,26 @@ public class Users
 
 	public void createUser() throws IOException
 	{
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
-		
-		System.out.println("Please, enter the user name: ");
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));		
+		System.out.print("Please, enter the user name: ");
 		String user = br.readLine();
-		System.out.println("Please, enter the password: ");
+		System.out.print("Please, enter the password: ");
 		String pass = br.readLine();
 		
 		if(this.validationUser(user))
 		{
 			this.addEnd(new NodeUsers(user, pass));
-			System.out.println("The user was created successfully");
+			System.out.println("***********************************");
+			System.out.println("THE USER WAS CREATED SUCCESSFULLY !!!");
+			System.out.println("***********************************\n");
 		}
 		else
-			System.out.println("The user already exists");		
+		{
+			System.out.println("***********************************");
+			System.out.println("THE USER ALREADY EXISTED");		
+			System.out.println("***********************************\n");
+		}
+			
 	}
 	
 }
