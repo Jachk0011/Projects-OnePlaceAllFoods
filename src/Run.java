@@ -3,14 +3,20 @@ import java.util.StringTokenizer;
 
 public class Run {
 
-	static Users users = new Users();  
+	static Users users = new Users();
+	static Restaurants restaurants = new Restaurants();  
+	
+	public void loadRestaurants()
+	{
+		this.readFile("Restaurants.txt");
+	}
 	
 	public void loadUsers()
 	{
-		this.readFileUsers();
+		this.readFile("Users.txt");
 	}
 	
-	public void readFileUsers()
+	public void readFile(String nameFile)
 	{
 		File file = null;
 		FileReader fr = null;
@@ -18,24 +24,46 @@ public class Run {
 
 		try 
 		{
-			file = new File ("Users.txt");
+			
+			
+			file = new File (nameFile);
 			fr = new FileReader (file);
 			br = new BufferedReader(fr);
 			
-			String line = null,
-					user,
-					pass
-					;
-			
-			
-			while((line = br.readLine()) != null)
+			if(nameFile.equals("Users.txt"))
 			{
-				StringTokenizer st = new StringTokenizer(line);
-				user = st.nextToken();
-				pass = st.nextToken();
+				String line = null,
+						user,
+						pass
+						;
 				
-				this.users.addEnd(new NodeUsers(user, pass));
+				
+				while((line = br.readLine()) != null)
+				{
+					StringTokenizer st = new StringTokenizer(line);
+					user = st.nextToken();
+					pass = st.nextToken();
+					
+					this.users.addEnd(new NodeUsers(user, pass));
+				}
 			}
+			
+			if(nameFile.equals("Restaurants.txt"))
+			{
+				String line = null,
+						restaurant;
+						
+				
+				
+				while((line = br.readLine()) != null)
+				{
+					restaurant = line;
+					this.restaurants.addEnd(new NodeRestaurants(restaurant));
+				}
+			}
+			else
+				System.out.println("WE COULDN NOT LOAD ANY EXTERNAL FILE");
+			
 			
 			 
 			
@@ -59,33 +87,42 @@ public class Run {
 	
 	public void writeFileUsers()
 	{
-        FileWriter fichero = null;
+        FileWriter file = null;
         PrintWriter pw = null;
         try
         {
-            fichero = new FileWriter("Users.txt", true);
-            pw = new PrintWriter(fichero);
-
-            /*for (int i = 10; i < 20; i++)
-                pw.println("Linea " + i);*/
+            file = new FileWriter("Users.txt", true);
+            pw = new PrintWriter(file);         
             
-            	pw.print(users.getTail().user + " " + users.getTail().pass);
+        	pw.print(users.getTail().user + " " + users.getTail().pass);
             
 
-        } catch (Exception e) {
+        }
+        catch (Exception e) 
+        {
             e.printStackTrace();
-        } finally {
-           try {
-           // Nuevamente aprovechamos el finally para 
-           // asegurarnos que se cierra el fichero.
-           if (null != fichero)
-              fichero.close();
-           } catch (Exception e2) {
+        }
+        finally 
+        {
+           try
+           {           
+	           if (null != file)
+	              file.close();
+           } catch (Exception e2) 
+           {
               e2.printStackTrace();
            }
         }
     }
 	
+	public void welcome()
+	{
+		System.out.println("****************************************************************************************************************");		
+		System.out.println(" ");
+		System.out.println("\t\tWELCOME TO BETA APPLICATION OF ONE PLACE ALL FOOD MODE CONSOLE");
+		System.out.println(" ");		
+		System.out.println("****************************************************************************************************************");
+	}
 	
 	public void optionsIntialMessage()
 	{
@@ -99,15 +136,10 @@ public class Run {
 	
 	public void runDemo() throws IOException
 	{
-		System.out.println("****************************************************************************************************************");		
-		System.out.println(" ");
-		System.out.println("\t\tWELCOME TO BETA APPLICATION OF ONE PLACE ALL FOOD MODE CONSOLE");
-		System.out.println(" ");		
-		System.out.println("****************************************************************************************************************");
 		
-		
+		this.welcome();		
 		this.loadUsers();
-		boolean flagCreateUsers = false;
+		
 		int option = -1;		
 		this.optionsIntialMessage();
 		
@@ -127,6 +159,15 @@ public class Run {
 			case 3: System.out.println("Search");
 				break;
 			case 4: System.out.println("Login");
+				String user = users.login(); 
+				if(!user.equalsIgnoreCase(null))
+				{
+					NodeUsers tmp = users.getHead();
+					while(tmp != null && !tmp.user.equalsIgnoreCase(user))
+						tmp = tmp.next;
+					tmp.status = true;
+				}
+				this.optionsIntialMessage();
 				break;
 			case 5: System.out.println("Sign up");				
 				if(users.createUser())
@@ -154,10 +195,12 @@ public class Run {
 	
 	public static void main(String[] args) throws IOException {
 		Run r = new Run();
-		r.runDemo();
-		users.printList();
 		
+		//r.runDemo();		
+		//users.printList();
 		
+		r.loadRestaurants();
+		restaurants.printList();
 
 	}
 

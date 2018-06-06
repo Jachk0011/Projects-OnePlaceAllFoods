@@ -4,6 +4,7 @@ public class NodeUsers {
 	public String user;
 	public String pass;
 	public NodeUsers next;
+	public boolean status = false;
 	
 	//CONSTRUCTORS 
 	public NodeUsers (){}
@@ -17,7 +18,7 @@ public class NodeUsers {
 	// NICE VIEW DATA
 	public String toString()
 	{
-		return "User: " + this.user + "\n";
+		return "User: " + this.user +" " + this.status +"\n";
 	}	
 	
 }

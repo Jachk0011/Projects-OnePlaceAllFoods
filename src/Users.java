@@ -162,28 +162,37 @@ public class Users
 	}
 
 
-	//print if the user value exist or not  
+	//validation to create a new user
 	public boolean validationUser(String user) 
-	{
-		boolean flag = false;
-		
+	{	
 		if(this.emptyList())
 			return true;
 		else
 		{
-			NodeUsers tmp = this.getHead();
-			int position = 1;
+			NodeUsers tmp = this.getHead();		
 			
 			while(tmp.user != user && tmp.next != null)
-			{
-				tmp = tmp.next;
-				position++;
-			}			
+				tmp = tmp.next;				
+						
 			if(tmp.user == user)	
-				return flag = false;
+				return false;
 			else
 				return true;
 		}
+	}
+	
+	//validation to login
+	public boolean validationUser(String user, String pass) 
+	{			
+		NodeUsers tmp = this.getHead();				
+		
+		while(!tmp.user.trim().equalsIgnoreCase(user.trim()) && tmp.next != null)			
+			tmp = tmp.next;				
+					
+		if(tmp.user.trim().equals(user.trim()) && tmp.pass.equals(pass))	
+			return true;
+		else
+			return false;		
 	}
 	
 
@@ -213,4 +222,29 @@ public class Users
 			
 	}
 	
+	public String login() throws IOException
+	{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));		
+		System.out.print("User name: ");
+		String user = br.readLine();
+		System.out.print("Password: ");
+		String pass = br.readLine();
+		
+		
+		if(this.validationUser(user, pass))
+		{			
+			System.out.println("***********************************");
+			System.out.println("NOW YOU ARE LOGGED !!!");
+			System.out.println("***********************************\n");			
+			return user;
+		}
+		else
+		{
+			System.out.println("***********************************");
+			System.out.println("THE USER OR THE PASSWORD IS NOT CORRECT, TRY AGAIN");		
+			System.out.println("***********************************\n");
+			return null;
+		}
+	}
+
 }
