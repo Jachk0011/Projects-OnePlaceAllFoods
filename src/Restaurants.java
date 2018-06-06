@@ -80,6 +80,26 @@ public class Restaurants
 		}
 		
 	}
+	
+	public void printList2() throws IOException
+	{
+		if(this.emptyList())
+			System.out.println("The list is empty");
+		else
+		{
+			NodeRestaurants tmp = head;
+			BufferedWriter br = new BufferedWriter(new OutputStreamWriter(System.out));
+			
+			while(tmp != null)
+			{
+				br.write(tmp.toString2());
+				tmp = tmp.next;
+			} 
+			br.flush();
+			//br.close();
+		}
+		
+	}
 
 	
 	
